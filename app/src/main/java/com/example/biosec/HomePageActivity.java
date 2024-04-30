@@ -244,13 +244,14 @@ public class HomePageActivity extends AppCompatActivity {
                         String status = checkResponse.getStatus();
                         if ("not_found".equals(status)) {
                             //continue loop
+                            Toast.makeText(HomePageActivity.this, "No Request", Toast.LENGTH_SHORT).show();
                         } else if ("request_found".equals(status)) {
                             //initiate biometric authentication by first checking and authenticating user device
                             checkAndauth();
                         }
                     } else {
                         //handle error
-                        Toast.makeText(HomePageActivity.this, "Error", Toast.LENGTH_SHORT).show();
+                        Toast.makeText(HomePageActivity.this, "No Request", Toast.LENGTH_SHORT).show();
                     }
                 }
             }
@@ -258,7 +259,7 @@ public class HomePageActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<CheckResponse> call, Throwable t) {
                 //handle failure
-                Toast.makeText(getApplicationContext(), "An error has occured", Toast.LENGTH_LONG).show();
+                Toast.makeText(HomePageActivity.this, "An error has occured", Toast.LENGTH_LONG).show();
             }
         });
     }
