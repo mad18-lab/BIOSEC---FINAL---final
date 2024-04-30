@@ -489,13 +489,14 @@ public class HomePageActivity extends AppCompatActivity {
             call.enqueue(new Callback<CreateResponse>() {
                 @Override
                 public void onResponse(Call<CreateResponse> call, Response<CreateResponse> response) {
-                    runOnUiThread(new Runnable() {
-                        @Override
-                        public void run() {
-                            Toast.makeText(HomePageActivity.this, "Biometric Authentication Successful: Files Unlocked", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(HomePageActivity.this, "REST API call made successfully", Toast.LENGTH_SHORT).show();
-                        }
-                    });
+                    if (response.isSuccessful()) {
+                        runOnUiThread(new Runnable() {
+                            @Override
+                            public void run() {
+                                Toast.makeText(HomePageActivity.this, "Biometric Authentication Successful: Files Unlocked", Toast.LENGTH_SHORT).show();
+                            }
+                        });
+                    }
                 }
 
                 @Override
@@ -517,9 +518,7 @@ public class HomePageActivity extends AppCompatActivity {
                     runOnUiThread(new Runnable() {
                         @Override
                         public void run() {
-                            Toast.makeText(HomePageActivity.this, "Biometric Authentication Unsuccessful: Files Unlocked", Toast.LENGTH_SHORT).show();
-                            Toast.makeText(HomePageActivity.this, "REST API call was not made", Toast.LENGTH_SHORT).show();
-                        }
+                            Toast.makeText(HomePageActivity.this, "Biometric Authentication Unsuccessful: Try Again", Toast.LENGTH_SHORT).show();}
                     });
                 }
 
